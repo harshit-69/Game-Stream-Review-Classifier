@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review Classifier</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: #fff;
+      }
+
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        width: 50%;
+        max-width: 600px;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      textarea {
+        width: 90%;
+        height: 100px;
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 1em;
+        font-family: "Verdana", sans-serif;
+        outline: none;
+        resize: none;
+      }
+
+      textarea::placeholder {
+        font-size: 1.2em;
+        color: #ccc;
+        font-style: italic;
+        font-family: "Georgia", serif;
+      }
+
+      button {
+        background-color: #ff7a59;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #ff5733;
+        transform: scale(1.05);
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 1.2em;
+        color: #ffeb3b;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        <span id="typed-element"></span>
+      </h1>
+      <form action="/predict" method="post">
+        <textarea
+          name="review"
+          placeholder="Enter your review here..."
+          required
+        ></textarea>
+        <br />
+        <button type="submit">Classify</button>
+      </form>
+      {% if sentiment %}
+      <div class="result">
+        <strong>Review:</strong> "{{ review }}"<br />
+        <strong>Predicted Sentiment:</strong> {{ sentiment }}
+      </div>
+      {% endif %}
+    </div>
+    <script>
+      var typed = new Typed("#typed-element", {
+        strings: ["REVIEW", "SENTIMENT", "CLASSIFIER"], // Add your strings here
+        typeSpeed: 50, // Typing speed in milliseconds
+        backSpeed: 30, // Backspace speed
+        backDelay: 1500, // Delay before typing the next string
+        loop: true, // Make it loop
+      });
+    </script>
+  </body>
+</html>
